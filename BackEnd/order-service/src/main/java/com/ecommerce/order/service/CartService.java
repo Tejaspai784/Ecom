@@ -6,4 +6,5 @@ public interface CartService {
     Cart getCartByUserId(String userId);
     Cart createCartForUser(String userId);
     void clearCart(String userId);
+    void addToCart(String userId, CartItemDTO itemDto);
 }

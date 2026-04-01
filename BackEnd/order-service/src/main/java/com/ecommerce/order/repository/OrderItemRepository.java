@@ -4,4 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface OrderItemRepository extends JpaRepository<OrderItem, Long> {
      List<OrderItem> findByOrderId(String orderId);
+     Optional<CartItem> findByCartIdAndSku(Long cartId, String sku);
+    List<CartItem> findByCartId(Long cartId);
 }

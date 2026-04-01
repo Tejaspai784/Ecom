@@ -17,10 +17,4 @@ public class OrderController {
     public Order createOrder(@RequestParam String userId) {
         return orderService.createOrder(userId, new ArrayList<>());
     }
-
-    @PostMapping("/add-item")
-    public String addItem(@RequestBody CartItemDTO itemDto) {
-    // Logic: use itemDto.getSku() and itemDto.getQuantity()
-    return "Added to cart";
-    }
 }
