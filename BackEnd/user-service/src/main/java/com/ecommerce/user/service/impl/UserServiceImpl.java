@@ -5,6 +5,7 @@ import com.ecommerce.user.repository.UserRepository;
 import com.ecommerce.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -13,12 +14,13 @@ public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
 
     @Override
+    @SuppressWarnings("null")
     public User registerUser(User user) {
         return userRepository.save(user);
     }
 
     @Override
     public User getUserByEmail(String email) {
-        return userRepository.findByEmail(email);
+        return Optional.ofNullable(userRepository.findByEmail(email)).orElse(null);
     }
 }
