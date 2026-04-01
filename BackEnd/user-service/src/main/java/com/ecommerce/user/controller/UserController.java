@@ -1,4 +1,5 @@
 package com.ecommerce.user.controller;
+import com.ecommerce.common.dto.RegistrationDTO;
 import com.ecommerce.user.model.User;
 import com.ecommerce.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,8 +13,8 @@ public class UserController {
     private UserService userService;
 
     @PostMapping("/register")
-    public User registerUser(@RequestBody User user) {
-        return userService.registerUser(user);
+    public User register(@RequestBody RegistrationDTO registrationDto) {
+        return userService.registerUser(registrationDto);
     }
 
     @GetMapping("/email/{email}")
