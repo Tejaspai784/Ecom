@@ -1,17 +1,28 @@
 package com.ecommerce.product.service.impl;
 
 import com.ecommerce.product.model.Product;
+import com.ecommerce.product.model.Inventory;
 import com.ecommerce.product.repository.ProductRepository;
+import com.ecommerce.product.repository.InventoryRepository;
+import com.ecommerce.product.repository.CategoryRepository;
 import com.ecommerce.product.service.ProductCatalogService;
+import com.ecommerce.common.dto.ProductCreationDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional; 
 import org.springframework.stereotype.Service;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class ProductCatalogServiceImpl implements ProductCatalogService {
 
     @Autowired
     private ProductRepository productRepository;
+     @Autowired
+    private InventoryRepository inventoryRepository;
+
+    @Autowired
+    private CategoryRepository categoryRepository;
 
     @Override
     public Product getProductBySku(String sku) {
@@ -33,7 +44,7 @@ public class ProductCatalogServiceImpl implements ProductCatalogService {
     inventory.setCurrentStock(dto.getInitialStock());
     inventory.setReservedStock(0);
     inventoryRepository.save(inventory);
-    categoryRepository.findById(dto.getCategoryId()).orElseThrow(() -> new RuntimeException("Cannot create product: Category ID " + dto.getCategoryId() + " does not exist"));
+    categoryRepository.findById(Objects.requireNonNull(dto.getCategoryId())).orElseThrow(() -> new RuntimeException("Cannot create product: Category ID " + dto.getCategoryId() + " does not exist"));
     return savedProduct;
 }
 

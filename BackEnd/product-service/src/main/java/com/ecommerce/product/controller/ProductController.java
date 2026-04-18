@@ -2,6 +2,7 @@ package com.ecommerce.product.controller;
 
 import com.ecommerce.product.model.Product;
 import com.ecommerce.product.service.ProductCatalogService;
+import com.ecommerce.common.dto.ProductCreationDTO; 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
@@ -24,8 +25,8 @@ public class ProductController {
     }
 
     @PostMapping
-    public Product create(@RequestBody Product product) {
-        return productCatalogService.createProduct(product);
+     public Product create(@RequestBody ProductCreationDTO dto) {
+        return productCatalogService.createProduct(dto);
     }
     
     @PutMapping("/{sku}")

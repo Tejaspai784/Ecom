@@ -1,17 +1,23 @@
 package com.ecommerce.order.service.impl;
 
+import com.ecommerce.common.dto.CartItemDTO;
 import com.ecommerce.order.model.Cart;
+import com.ecommerce.order.model.CartItem;
+import com.ecommerce.order.repository.CartItemRepository;
 import com.ecommerce.order.repository.CartRepository;
 import com.ecommerce.order.service.CartService;
 import java.util.Date;
+import java.util.Objects;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class CartServiceImpl implements CartService {
 
   @Autowired private CartRepository cartRepository;
-  private CartItemRepository cartItemRepository;
+  @Autowired private CartItemRepository cartItemRepository;
 
   @Override
   public Cart getCartByUserId(String userId) {
@@ -32,7 +38,7 @@ public class CartServiceImpl implements CartService {
         .findByUserId(userId)
         .ifPresent(
             cart -> {
-              cartRepository.delete(cart);
+              cartRepository.delete(Objects.requireNonNull(cart));
             });
   }
 

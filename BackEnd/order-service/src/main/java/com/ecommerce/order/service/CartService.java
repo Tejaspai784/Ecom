@@ -1,5 +1,5 @@
 package com.ecommerce.order.service;
-
+import com.ecommerce.common.dto.CartItemDTO;
 import com.ecommerce.order.model.Cart;
 
 public interface CartService {
